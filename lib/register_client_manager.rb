@@ -51,11 +51,11 @@ module RegistersClient
       def get_environment_url_from_phase(phase)
         case phase
         when 'beta'
-          URI.parse('http://register.172.26.16.190:4011/')
+          URI.parse('http://register.172.26.16.190:4011')
         when 'discovery'
-          URI.parse('https://register.cloudapps.digital')
+          URI.parse('http://register.172.26.16.190:4011')
         when 'alpha', 'test'
-          URI.parse("https://register.#{phase}.openregister.org")
+          URI.parse("http://register.172.26.16.190:4011")
         else
           raise ArgumentError "Invalid phase '#{phase}'. Must be one of 'beta', 'alpha', 'discovery', 'test'."
         end
