@@ -20,7 +20,7 @@ module RegistersClient
         if !@register_clients.key?(key)
           data_store = options.has_key?(:data_store) ? options[:data_store] : RegistersClient::InMemoryDataStore.new(@config_options)
           register_url = get_register_url(register, environment_url)
-
+          puts("register_url #{register_url}")
           @register_clients[key] = create_register_client(register_url, data_store, @config_options.fetch(:page_size))
         end
   
