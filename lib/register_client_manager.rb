@@ -10,8 +10,11 @@ module RegistersClient
       end
   
       def get_register(register, phase, options = {})
+        puts("Get register")
         environment_url = get_environment_url_from_phase(phase)
+        puts("environment_url #{environment_url}")
         get_register_from_environment(register, environment_url, options)
+        puts("environment_url #{environment_url}")
       end
 
       def get_register_from_environment(register, environment_url, options = {})
