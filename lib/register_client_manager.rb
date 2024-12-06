@@ -10,11 +10,8 @@ module RegistersClient
       end
   
       def get_register(register, phase, options = {})
-        puts("Get register")
         environment_url = get_environment_url_from_phase(phase)
-        puts("environment_url #{environment_url}")
         get_register_from_environment(register, environment_url, options)
-        puts("environment_url #{environment_url}")
       end
 
       def get_register_from_environment(register, environment_url, options = {})
@@ -23,7 +20,7 @@ module RegistersClient
         if !@register_clients.key?(key)
           data_store = options.has_key?(:data_store) ? options[:data_store] : RegistersClient::InMemoryDataStore.new(@config_options)
           register_url = get_register_url(register, environment_url)
-          puts("register_url #{register_url}")
+
           @register_clients[key] = create_register_client(register_url, data_store, @config_options.fetch(:page_size))
         end
   
@@ -54,11 +51,11 @@ module RegistersClient
       def get_environment_url_from_phase(phase)
         case phase
         when 'beta'
-          URI.parse('https://register.dev-tpz-apps.tpzdsp3.com')
+          URI.parse('http://register.192.168.1.99.nip.io:8080')
         when 'discovery'
-          URI.parse('https://register.dev-tpz-apps.tpzdsp3.com')
+          URI.parse('http://register.192.168.1.99.nip.io:8080')
         when 'alpha', 'test'
-          URI.parse("https://register.dev-tpz-apps.tpzdsp3.com")
+          URI.parse("http://register.192.168.1.99.nip.io:8080")
         else
           raise ArgumentError "Invalid phase '#{phase}'. Must be one of 'beta', 'alpha', 'discovery', 'test'."
         end
